@@ -436,8 +436,9 @@ x-gif.two-up::shadow .frame {
 }
 
 img.smallish {
-  max-height: 20%;
-  transform: scale(1.8);
+  max-height: 15vh;
+  transform-origin: 50% 0%;
+  transform: scale(2);
 }
 
 //.token.function {

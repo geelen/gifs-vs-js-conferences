@@ -12,6 +12,7 @@ code[class*="language-"], pre[class*="language-"] {
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
+  line-height: 1.5;
   -moz-tab-size: 4;
   tab-size: 4;
   -webkit-hyphens: none;
@@ -82,7 +83,7 @@ pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[cl
 .namespace {
   opacity: 0.7; }
 
-.token.tag, .token.boolean, .token.number {
+.token.tag, .token.boolean, .token.number, .token.deleted {
   color: #cf694a;
   /* #CF6A4C */ }
 
@@ -90,7 +91,7 @@ pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[cl
   color: #f9ee9a;
   /* #F9EE98 */ }
 
-.token.attr-name, .token.attr-value, .token.string, .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable {
+.token.attr-name, .token.attr-value, .token.string, .token.char, .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable, .token.inserted {
   color: #919e6b;
   /* #8F9D6A */ }
 
@@ -204,16 +205,12 @@ article {
 
 .bespoke-slide.content, .bespoke-slide > .content {
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-flex-direction: column;
-      -ms-flex-direction: column;
           flex-direction: column;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
           justify-content: center;
   -webkit-align-items: center;
-      -ms-flex-align: center;
           align-items: center;
   text-align: center;
   width: 640px;
@@ -547,16 +544,13 @@ hr {
   font-family: "EB Garamond", Georgia;
   font-style: italic;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   -webkit-align-items: center;
-      -ms-flex-align: center;
           align-items: center; }
   .mid::before, .mid::after {
     content: '';
     -webkit-flex-grow: 1;
-        -ms-flex-positive: 1;
             flex-grow: 1;
     display: block;
     border-top: dotted 1px rgba(255, 255, 255, 0.3); }
@@ -596,21 +590,16 @@ hr {
 
 .line {
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-align-items: center;
-      -ms-flex-align: center;
           align-items: center; }
 
 .leftalign {
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-flex-direction: column;
-      -ms-flex-direction: column;
           flex-direction: column;
   -webkit-align-items: left;
-      -ms-flex-align: left;
           align-items: left; }
 
 .ta-left {
@@ -652,9 +641,11 @@ x-gif.two-up::shadow .frame {
   width: 100%; }
 
 img.smallish {
-  max-height: 20%;
-  -webkit-transform: scale(1.8);
-          transform: scale(1.8); }
+  max-height: 15vh;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform: scale(2);
+          transform: scale(2); }
 
 .fullscreen {
   position: absolute;

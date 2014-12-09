@@ -3,7 +3,7 @@ html
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    title A GIF Odyssey
+    title GIFs vs JS Conferences
 
     link(rel='stylesheet', type='text/css', href='styles/styles.css')
     script.
@@ -66,9 +66,6 @@ html
           x-gif(src="images/deal-with-it-goat.gif" fill stopped n-times='1')
 
       section.content
-        h1 The Idea
-
-      section.content
         h1 VastImg
 
       section.content(data-bespoke-state='black')
@@ -105,25 +102,41 @@ html
       section(data-bespoke-steps="2")
         .fullscreen(ui-fx="blur1 arnie")
           x-gif(src="images/arnie_happy.gif" fill stopped speed='0.4' ping-pong)
+     
+      section.content(data-bespoke-state='light')
+        h3: strong MelbJS, April 10th, 2013
+        
+      section.content(data-bespoke-state='light')
+        h3
+          a(target="_blank" href="http://superhighfives.github.io/tweetflight-presentation/") superhighfives.github.io/tweetflight-presentation
 
       section
         .fullscreen(ui-fx="blur2")
           x-gif(src="images/takes_off_glasses.gif" fill stopped speed='1')
+          
+      section
+        .fullscreen(ui-fx="blur2")
+          x-gif(src="images/wdc13.gif" fill stopped speed='0.6')
+        .content: h3: strong Web Directions Code 
+          br
+          | May 2013
+        
+      section
+        .fullscreen(ui-fx="blur2")
+          x-gif(src="images/wds13.gif" fill stopped speed='0.6')
+        .content: h3: strong Web Directions South 
+          br
+          | October 2013
+        
+      section.content(data-bespoke-state='light')
+        h3: strong More talks?
 
       section.content(data-bespoke-state='light')
-        img(src="images/djgif_logo.gif")
-        h1 DJGif
-        h4 github.com/geelen/djgif
-        h4 djgif.com
-          span.feat  (one day)
-
-      section.content.nobuild
-        .mid Two challenges:
-        ul
-          li Change speed of GIFs
-          li.fadeout Find beats from music
-        hr
-
+        img(src="images/jsconfuscfp.PNG")
+        
+      section.content
+        h1 More GIFs.
+        
       section.content
         pre
           code.language-markup.
@@ -133,19 +146,6 @@ html
             var img = new Image;
             img.src = "definitely_cats.gif";
         h3 Now what?
-
-      section.content
-        h1.red ✖
-
-      section.content
-        .mid What is
-        h3
-          strong an animation
-        .mid but a
-        h3
-          strong series of
-            span.feat  frames
-        .mid ?
 
       section.content
         h1 What's in a GIF?
@@ -181,7 +181,7 @@ html
             span.red  frame
             |  footer
 
-      seciton.content
+      section.content
         h1
           a(target="_blank" href="https://github.com/geelen/x-gif/blob/gh-pages/src/exploder.js") exploder.js
 
@@ -219,10 +219,23 @@ html
               requestAnimationFrame(animate);
             }
             animate();
-
+          
       section.content(data-bespoke-state='light')
-        h3 Chapter Two
-        h1 The Component
+        img(src="images/jsconfuscfp.PNG")
+          
+      section.content(data-bespoke-state='light')
+        img(src="images/jan10deadline.png")
+        
+      section.content(data-bespoke-state='light')
+        img(src="images/jsconfdecline.png")
+        
+      section.content(data-bespoke-state='light')
+        img(src="images/mtnwestaccept.png")
+        
+      section.content(data-bespoke-state='light')
+        h1 MWJS
+          br
+          | March 2014
 
       section.content(data-bespoke-state='light')
         h3: strong Dreamcode
