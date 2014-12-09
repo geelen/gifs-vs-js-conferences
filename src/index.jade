@@ -24,7 +24,7 @@ html
         .content
           h1: small GIFs
           .mid vs
-          h1: small Web Components
+          h1: small JS Conferences
           .mid by
           .line
             .me
@@ -34,11 +34,19 @@ html
         .content
           h3 Me?
 
+      section.fullscreen
+        .content
+          h3 I'm just some guy, you know?
+
       section
         .fullscreen(ui-fx="blur2")
           x-gif(src="images/apollorockygif1.gif" fill speed="1.2" n-times="1" stopped)
         .content
           h1 Me & GIFs
+
+      section.fullscreen
+        .content
+          h3 Two years of my life
 
       section
         .fullscreen(ui-fx="blur1")
@@ -58,18 +66,10 @@ html
           x-gif(src="images/deal-with-it-goat.gif" fill stopped n-times='1')
 
       section.content
-        h3 Chapter One
         h1 The Idea
 
       section.content
         h1 VastImg
-
-      section
-        .fullscreen(ui-fx="blur2")
-          x-gif(src="images/shocked.gif" fill n-times="1" stopped)
-        .content.wait-for-gif
-          div
-          h1 ETOOMUCHPORN
 
       section.content(data-bespoke-state='black')
         h1 GifCity
