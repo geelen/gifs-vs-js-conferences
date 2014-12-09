@@ -232,10 +232,19 @@ html
       section.content(data-bespoke-state='light')
         img(src="images/mtnwestaccept.png")
         
-      section.content(data-bespoke-state='light')
-        h1 MWJS
+      section
+        .fullscreen(ui-fx="blur2")
+          x-gif(src="images/mtnwestdemo.gif" fill stopped speed='0.6')
+        .content: h3: strong Mountain West JS
           br
           | March 2014
+        
+      section
+        .fullscreen(ui-fx="blur2")
+          x-gif(src="images/scene-missing.gif" fill stopped speed='0.8')
+        .content: h3: strong JS Conf AU
+          br
+          | April 2014
 
       section.content(data-bespoke-state='light')
         h3: strong Dreamcode
@@ -261,79 +270,6 @@ html
       section.content(data-bespoke-state='light')
         pre: code.language-javascript
           = "<x-gif\n  src=''\n  // Playback Modes\n  [speed='' || sync || bpm='']\n  // Playback options\n  stopped\n  fill\n  n-times=''\n  ping-pong\n  snap\n>"
-
-      //section.content(data-bespoke-state='light')
-      //  h6 &lt;img src="images/jump.gif"&gt;
-      //  img.two-up(data-bespoke-delay-src="images/jump.gif")
-      //  x-gif.two-up(src="images/jump.gif" stopped)
-      //  h6 &lt;
-      //    span.feat x-gif
-      //    |  src="images/jump.gif"&gt;
-      //
-      //section.content(data-bespoke-state='light')
-      //  h6 &lt;x-gif src="images/jump.gif"&gt;
-      //  x-gif.two-up(src="images/jump.gif" speed="1" stopped)
-      //  x-gif.two-up(src="images/jump.gif" speed="2" stopped)
-      //  h6 &lt;x-gif src="images/jump.gif"
-      //    span.feat  speed="2"
-      //    | &gt;
-      //
-      //section.content(data-bespoke-state='light')
-      //  h6 &lt;img src="images/waves.gif"&gt;
-      //  img.two-up(src="images/waves.gif")
-      //  img.two-up(src="images/vectors.gif")
-      //  h6 &lt;img src="images/vectors.gif"&gt;
-      //
-      //section.content.nobuild(data-bespoke-state='light')
-      //  h6 &lt;x-gif src="images/waves.gif"
-      //    span.feat  bpm="140"
-      //    | &gt;
-      //  x-gif.two-up(src="images/waves.gif" bpm="140" stopped)
-      //  x-gif.two-up(src="images/vectors.gif" bpm="140" stopped)
-      //  h6 &lt;x-gif src="images/vectors.gif
-      //    span.feat  bpm="140"
-      //    | &gt;
-      //
-      //section.content.nobuild(data-bespoke-state='light' )
-      //  h6 &lt;x-gif src="images/waves.gif"
-      //    span.feat  hard-bpm="140"
-      //    | &gt;
-      //  x-gif.two-up(src="images/waves.gif" hard-bpm="140" stopped)
-      //  x-gif.two-up(src="images/vectors.gif" hard-bpm="140" stopped)
-      //  h6 &lt;x-gif src="images/vectors.gif
-      //    span.feat  hard-bpm="140"
-      //    | &gt;
-      //
-      //section.content.nobuild(data-bespoke-state='light')
-      //  h6 &lt;x-gif src="images/jump.gif"
-      //  x-gif.two-up(src="images/jump.gif" stopped)
-      //  x-gif.two-up(src="images/jump.gif" ping-pong stopped)
-      //  h6 &lt;x-gif src="images/jump.gif
-      //    span.feat  ping-pong
-      //    | &gt;
-      //
-      //section.content.nobuild(data-bespoke-state='light')
-      //  h6 &lt;x-gif src="images/jump.gif"
-      //    span.feat  n-times="1"
-      //    | &gt;
-      //  x-gif.two-up(src="images/jump.gif" n-times="1" stopped)
-      //  x-gif.two-up(src="images/jump.gif" n-times="2" stopped)
-      //  h6 &lt;x-gif src="images/jump.gif
-      //    span.feat  n-times="2"
-      //    | &gt;
-      //
-      //section
-      //  .fullscreen
-      //    x-gif(src="images/jump.gif" fill stopped)
-      //  .content.nobuild(data-bespoke-state='light')
-      //    h6 &lt;x-gif src="images/jump.gif"
-      //      span.feat  fill
-      //      | &gt;
-      //
-      //section.content(data-bespoke-state='light')
-      //  img(src="images/p-logo.svg")
-      //  h4 geelen.github.io/x-gif
-      //  h4.feat The GIF tag the internet deserves
 
       section.content
         h3 Chapter Three
@@ -415,29 +351,6 @@ html
 
       section.content
         h1.red ✖
-
-      section.content
-        h4 Problems
-        ul
-          li Frameworks aren't really compatible with one another
-          li All have different expectations/idioms for accomplishing things
-
-      //section.content
-      //  h4 An example - Playback
-      //  pre
-      //    code.language-javascript
-      //      = "setFrame(fraction, repeatCount) {\n  var frameNr = // SOME MATHS;\n  this.element.dataset['frame'] = frameNr;\n}"
-      //  pre
-      //    code.language-javascript
-      //      = "setFrame(fraction, repeatCount) {\n  var frameNr = // SAME MATHS;\n  this.domUpdater.setFrame(frameNr);\n}"
-      //
-      //section.content
-      //  pre
-      //    code.language-javascript
-      //      = "class DirectDomUpdater {\n  setFrame(frameNr) {\n    this.element.dataset['frame'] = frameNr;\n  }\n}"
-      //  pre
-      //    code.language-javascript
-      //      = "// Meets the api for the DomUpdater that Playback expects\n// but React works totally differently.\nclass GifState {\n  setFrame(frameNr) { this.frameNr = frameNr; }\n}"
 
       section.content
         h4 An example - Playback
@@ -569,9 +482,9 @@ html
         .fullscreen(ui-fx="blur1")
           x-gif(src="images/carl_sagan_good.gif" fill n-times="1" stopped)
         .content.wait-for-gif
-          h1 The Web
-          .mid is
-          h1 awesome
+          h1 Write code
+          .mid &
+          h1 talk about it!
 
       section.content(data-bespoke-state='light')
         h1 Thanks!
@@ -579,10 +492,6 @@ html
           .me
           h3
             strong @GlenMaddern
-        h6 geelen.github.io/gifs-vs-web-components
-          br
-          small ~46Mb ¯\_(ツ)_/¯
-        h6 geelen.github.io/x-gif
 
     script(src='scripts/scripts.js')
     link(rel="import" href="x-gif/dist/x-gif.html")
