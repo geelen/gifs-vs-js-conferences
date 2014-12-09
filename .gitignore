@@ -3,3 +3,4 @@ src/bower_components
 .tmp
 .sass-cache
 .idea
+npm-debug.log
