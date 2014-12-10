@@ -343,175 +343,64 @@ html
           li You now know people in cool cities and can hang with them after
           
       section.content.small
+        h1 Want to speak?
+          
+      section.content.small
         h4 How to get accepted
         ul
           li Speak at MelbJS!
           li Think like the selection committee
-          li Have something only you can talk about
           li Submit to literally everything
+          li Submit more than one talk each time
+          li Don't be discouraged
           
       section.content.small
-        h4 
+        h4 Typical selection process
         ul
-          li 
-          li Diversity of everything
-          li Local people
+          li First round is (mostly) anonymous
+          li Shortlist from top-voted talks
+          li Final talks are hand-picked from there
+          
+      section.content.small
+        h4 Rejected before round 1?
+        ul
+          li Usually no feedback from the organisers
+          li Try changing the amount of detail
+          li Try a different balance of tech vs use-case
+          li Make it more personal
+          
+      section.content.small
+        h4 Rejected after round 1?
+        ul
+          li Submit that talk everwhere else right now! Go do it!
+          li Still won't get much feedback
+          li Your talk might just have been nobody's favourite
+          li You might not have been the right speaker for that event
 
       section.content.small
-        h4 An idea!
+        h4 Factors influencing round 2
         ul
-          li A framework-agnostic core, with adapters for each framework
-          li Consistent component API
-          li Bare minimum of dependencies for each framework
-          li One library, 4 entry points
+          li Speaker experience
+            br 
+            small (Good conferences &lt;3 first-time speakers)
+          li Diversity of topics
+          li Diversity of speakers
+          li Cost
 
-      section.content
-        h4 Superficially, it should work
-        pre
-          code.language-javascript.
-            import XGifCore from './x-gif.core.js'
-            myModule.directive('xGif', XGifCore.Angular);
-            Ember.Component.extend(XGifCore.Ember);
-            React.createClass(XGifCore.React);
-            Polymer('x-gif', XGifCore.Polymer);
-
-      section.content
-        h1.red ✖
-
-      section.content
-        h4 An example - Playback
-        pre: code.language-javascript
-          = "setFrame(fraction, repeatCount) {\n  var frameNr = (this.pingPong && repeatCount % 2 >= 1) ?\n    this.gif.frameAt(1 - fraction) :\n    this.gif.frameAt(fraction);\n  this.element.dataset['frame'] = frameNr;\n}"
-
-      section.content
-        h4 React changes
-        pre: code.language-javascript
-          = "setFrame(fraction, repeatCount) {\n  var frameNr = // SAME MATHS;\n  this.domUpdater.setFrame(frameNr);\n}"
-        pre: code.language-javascript
-          = "class ShadowDomUpdater { /* ... */ }\n"
-          = "class ReactStateUpdater {/* ... */ }\n"
-
-      section.content
-        img(src="images/loljava.png")
-
-      section
-        .fullscreen
-          x-gif(src="images/sigh.gif" fill stopped)
-
-      section
-        .fullscreen(ui-fx="dark50%")
-          x-gif(src="images/badass.gif" fill stopped speed='0.8' ping-pong)
-        .content
-          h1 Shadow DOM
-          .mid is
-          h1 badass
-
-      section.content
-        h1 :(
-
-      section.content(data-bespoke-state='light')
-        h3 Chapter Four
-        h1 The Solution
-
-      section.content(data-bespoke-state='chrome')
-        h1 Chrome 36
-
-      section.content(data-bespoke-state='light')
-        img(src="images/addy_chrome_36.png")
-
-      section.content(data-bespoke-state='light')
-        h4 Polymer
-        .mid is not equal to
-        h4 Web Components
-
-      section.content(data-bespoke-state='light')
-        h6 Polymer
-        pre: code.language-javascript
-          = "class XGif {\n ready() { /* ... */ }\n}\nPolymer('x-gif', new XGif());"
-        h6 Web Components
-        pre: code.language-javascript
-          = "class XGif extends HTMLElement {\n  createdCallback() { /* ... */ }\n}\ndocument.registerElement('x-gif', XGif);"
-
-      section.content(data-bespoke-state='light')
-        h6 Polymer
-        pre.small: code.language-javascript
-          = "srcChanged() {\n  this.playback = new Playback(/* ... */)\n}\nspeedChanged(oldVal, newVal) {\n  this.playback.speed = newVal;\n}"
-        h6 Web Components
-        pre.small: code.language-javascript
-          = "attributeChangedCallback(attribute, oldVal, newVal) {\n  if (attribute == 'src') {\n    this.controller.srcChanged(newVal)\;\n  } else if (attribute == 'speed') {\n    this.controller.speedChanged(parseFloat(newVal));\n  // ..."
-
-      section.content(data-bespoke-state='light')
-        h6 x-gif.html (Polymer)
-        pre.small: code.language-markup
-          = "<link rel='import' href='polymer.html'>\n\n<polymer-element name='x-gif' attributes='src speed ... stopped'>\n  <template>\n    <link rel='stylesheet' href='x-gif.css' />\n    <div class='frames-wrapper'>\n      <div id='frames'></div>\n    </div>\n  </template>\n</polymer-element>\n\n<script src='x-gif.js'></script>\n<!-- calls Polymer('x-gif', new XGif()) -->"
-
-      section.content(data-bespoke-state='light')
-        h6 x-gif.html (Web Component)
-        pre.small: code.language-markup
-          = "<template id='template'>\n  <link rel='stylesheet' href='x-gif.css' />\n  <div class='frames-wrapper'>\n    <div id='frames'></div>\n  </div>\n</template>\n\n<script src='x-gif.js'></script>"
-
-      section.content(data-bespoke-state='light')
-        h6 x-gif.js (Web Component)
-        pre.small: code.language-javascript
-          = "class XGif extends HTMLElement {\n  createdCallback() {\n    this.shadow = this.xgif.createShadowRoot();\n    var owner = document.currentScript.ownerDocument;\n    var template = owner.querySelector('#template');\n    this.shadow.appendChild(template.content.cloneNode(true));\n  }\n}\n\ndocument.registerElement('x-gif', XGif);"
-
-      section.content(data-bespoke-state='light')
-        h4 Chrome 36+
-        pre: code.language-markup
-          = "<link rel='import' href='x-gif.html'>\n<x-gif src='mrt_works_it.gif'></x-gif>"
-        h6= "<x-gif>"
-        pre: code.
-          x-gif.local.html - 1kb
-          x-gif.js - 11kb
-          x-gif.css - 3kb
-        h6
-          br
-          | Vulcanized
-        pre: code.
-          x-gif.html - 14kb
-
-      section.content(data-bespoke-state='light')
-        h1 platform.js
-        h4 ... it's not just for Polymer
-
-      section.content(data-bespoke-state='light')
-        h6 All browsers (IE9+)
-        pre.small: code.language-javascript
-          = "<script>\n  if ('registerElement' in document\n    && 'createShadowRoot' in HTMLElement.prototype\n    && 'import' in document.createElement('link')\n    && 'content' in document.createElement('template')) {\n    // We're using a browser with native WC support!\n  } else {\n    document.write(\"<script src='platform.js'><\/script>\")\n  }\n</script>\n<link rel='import' href='x-gif.html'>\n<x-gif src='mrt_works_it.gif'></x-gif>"
-        pre: code.
-          platform.js - 50kb
-          x-gif.html - 14kb
-
-      section.content(data-bespoke-state='light')
-        h1 What's so different?
-
-      section.content(data-bespoke-state='light')
-        .mid Extend the
-        h1 browser
-        .mid not the
-        h1 framework
-        hr
-
-      section.content(data-bespoke-state='light')
-        h2 Everything talks
-        h1 HTML
-
-      section.content
-        h3 Closing thoughts
-
-      section.content
-        ul
-          li Really think about your HTML api
-          li Know what kind of component you're writing
+      section.content.small
+        h1 In summary...
 
       section
         .fullscreen(ui-fx="blur1")
           x-gif(src="images/carl_sagan_good.gif" fill n-times="1" stopped)
         .content.wait-for-gif
-          h1 Write code
+          h1 Do cool stuff
           .mid &
-          h1 talk about it!
-
+          h1 go speak about it!
+          
+      section.content.small
+        h1 Follow @cssconfau
+        
       section.content(data-bespoke-state='light')
         h1 Thanks!
         .line
