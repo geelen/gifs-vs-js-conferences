@@ -221,6 +221,9 @@ html
             animate();
           
       section.content(data-bespoke-state='light')
+        h1 "A GIF Odyssey"
+             
+      section.content(data-bespoke-state='light')
         img(src="images/jsconfuscfp.PNG")
           
       section.content(data-bespoke-state='light')
@@ -235,101 +238,124 @@ html
       section
         .fullscreen(ui-fx="blur2")
           x-gif(src="images/mtnwestdemo.gif" fill stopped speed='0.6')
-        .content: h3: strong Mountain West JS
-          br
-          | March 2014
-        
+        .content
+          h1 Mountain West JS
+            h3: strong Salt Lake City
+              br
+              | March 2014
+      
       section
         .fullscreen(ui-fx="blur2")
           x-gif(src="images/scene-missing.gif" fill stopped speed='0.8')
-        .content: h3: strong JS Conf AU
-          br
-          | April 2014
-
+        .content
+          h1 JSConf AU
+            h3: strong Melbourne
+              br
+              | April 2014
+          
       section.content(data-bespoke-state='light')
-        h3: strong Dreamcode
-
-      section.content(data-bespoke-state='light')
-        pre: code.language-markup
-          = "<img src='lulz.gif'>"
-        pre: code.language-markup
-          = "<x-gif src='lulz.gif'>"
-
-      section
-        .fullscreen(ui-fx="")
-          x-gif(src="images/is-it-possible.gif" fill stopped speed='1' n-times='1')
-
-      section.content(data-bespoke-state='light')
+        img(src="images/jsconfbr.png")
+        h3: strong JS Conf Brazil (almost!)
+        
+      section.content(data-bespoke-state='')
         img(src="images/p-logo.svg")
         h1. &lt;x-gif&gt;
-        h4 geelen.github.io/x-gif
+        h4: a(target="_blank" href="http://geelen.github.io/x-gif") geelen.github.io/x-gif
 
       section.content(data-bespoke-state='light')
-        h4: a(target="_blank" href="http://localhost:1983/#/nope.gif") geelen.github.io/x-gif
-
-      section.content(data-bespoke-state='light')
-        pre: code.language-javascript
-          = "<x-gif\n  src=''\n  // Playback Modes\n  [speed='' || sync || bpm='']\n  // Playback options\n  stopped\n  fill\n  n-times=''\n  ping-pong\n  snap\n>"
-
-      section.content
-        h3 Chapter Three
-        h1 The Launch
-
-      section.content
-        img(src="images/x-gif_traffic.png")
-
+        h1 "GIFs vs Web Components"
+        
       section
         .fullscreen(ui-fx="blur2")
-          x-gif(src="images/ticked.gif" fill stopped speed='1.5' n-times='0.8' ping-pong)
+          x-gif(src="images/cascadia.gif" fill stopped speed='0.8')
+        .content
+          h1 CascadiaJS
+          h3: strong Portland
+            br
+            | August 2014
+        
+      section
+        .fullscreen(ui-fx="blur2")
+          x-gif(src="images/jsconfeu.gif" fill stopped speed='0.8')
+        .content
+          h1 JSConf EU
+          h3: strong Berlin
+            br
+            | September 2014
+          
+      section.content(data-bespoke-state='light')
+        h3: strong #winning
 
-      section.content
-        h6 Polymer
-        pre: code.
-          platform.js - 50kb
-          polymer.html - 1kb
-          polymer.js - 23kb
-          layout.html - 2kb
-        h6
+      section.content(data-bespoke-state='light')
+        img(src="images/front-trends.png")
+        h1 Front Trends
+        h3: strong Warsaw 
           br
-          = "<x-gif>"
-        pre: code.
-          x-gif.html - 1kb
-          x-gif.js - 11kb
-          x-gif.css - 3kb
-        h6
-          br
-          | 7 requests, 91kb total
+          | May 2015
 
-      section.content(data-bespoke-state='black')
-        h4 https://github.com/Polymer/vulcanize
-
-      section.content.nobuild(data-bespoke-state="vulcan")
-        h4 https://github.com/Polymer/vulcanize
-
+      section.content(data-bespoke-state='light')
+        h3: strong #hardwinning
+        
       section.content
-        pre: code.language-bash.
-          vulcanize -o dist/x-gif.vulcan.html --inline dist/x-gif.html
-        pre: code.
-          platform.js - 50kb
-          x-gif.vulcan.html - 34kb
-        h6
-          br
-          | 2 requests, 84kb total
-
-      section.content
-        h4 Polymer
-        ul
-          li A framework in its own right
-          li Has opinions about structure, reuse
-          li Very easy to get started
-          li Seemed orthogonal to my purpose
+        h1 JavaScript Conferences
+        h3 What have I learned?
 
       section.content.small
-        h4 What about Angular/Ember/React?
+        h4 A few types of talks
         ul
-          li Custom elements without Web Components
-          li Provide common functionality (Promises, XHR)
-          li Why not use them?
+          li "Look at Spec X!"
+          li "Look at this dumb hack!"
+          li "Look after yourselves"
+
+      section.content.small
+        h4 Speaking is costly
+        ul
+          li Time
+          li Money
+          li Stress
+          
+      section.content.small
+        h4 Time
+        ul
+          li Developing the proposal
+          li Building the talk
+          li Travel
+          
+      section.content.small
+        h4 Money
+        ul
+          li Time you're not earning
+          li Rarely everything is covered
+          li Reimbursements can be delayed
+          
+      section.content.small
+        h4 Stress
+        ul
+          li It's totally nerve-wrecking
+          li You may not see/enjoy any of the other talks
+          li Impostor syndrome right in the face
+          
+      section.content.small
+        h4 It's also pretty great
+        ul
+          li At least one person in the audience dug your talk and wants you to know it
+          li The other speakers are awesome
+          li You now know people in cool cities and can hang with them after
+          
+      section.content.small
+        h4 How to get accepted
+        ul
+          li Speak at MelbJS!
+          li Think like the selection committee
+          li Have something only you can talk about
+          li Submit to literally everything
+          
+      section.content.small
+        h4 
+        ul
+          li 
+          li Diversity of everything
+          li Local people
 
       section.content.small
         h4 An idea!
