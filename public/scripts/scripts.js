@@ -13,17 +13,12 @@ bespoke.plugins.touch=function(a,b){var c,d,e=b===!0||"horizontal"==b?"X":"Y";a.
 /*! bespoke-bullets v0.2.1 © 2013 Mark Dalgleish, Licensed MIT */
 (function(e){e.plugins.bullets=function(e,t){var n,r,i=e.slides.map(function(e){return[].slice.call(e.querySelectorAll(typeof t=="string"?t:"[data-bespoke-bullet]"),0)}),s=function(){var e=n+1;if(a(1))return u(n,r+1),!1;i[e]&&u(e,0)},o=function(){var e=n-1;if(a(-1))return u(n,r-1),!1;i[e]&&u(e,i[e].length-1)},u=function(e,t){n=e,r=t,i.forEach(function(n,r){n.forEach(function(n,i){n.classList.add("bespoke-bullet"),r<e||r===e&&i<=t?(n.classList.add("bespoke-bullet-active"),n.classList.remove("bespoke-bullet-inactive")):(n.classList.add("bespoke-bullet-inactive"),n.classList.remove("bespoke-bullet-active"))})})},a=function(e){return i[n][r+e]!==undefined};e.on("next",s),e.on("prev",o),e.on("slide",function(e){u(e.index,0)}),u(0,0)}})(bespoke);
 
+
 /* **********************************************
      Begin prism-core.js
 ********************************************** */
 
-self = (typeof window !== 'undefined')
-	? window   // if in browser
-	: (
-		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
-		? self // if in worker
-		: {}   // if in node js
-	);
+var self = (typeof window !== 'undefined') ? window : {};
 
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
@@ -40,7 +35,7 @@ var _ = self.Prism = {
 	util: {
 		encode: function (tokens) {
 			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+				return new Token(tokens.type, _.util.encode(tokens.content));
 			} else if (_.util.type(tokens) === 'Array') {
 				return tokens.map(_.util.encode);
 			} else {
@@ -87,31 +82,10 @@ var _ = self.Prism = {
 			return lang;
 		},
 
-		/**
-		 * Insert a token before another token in a language literal
-		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-		 * we cannot just provide an object, we need anobject and a key.
-		 * @param inside The key (or language id) of the parent
-		 * @param before The key to insert before. If not provided, the function appends instead.
-		 * @param insert Object with the key/value pairs to insert
-		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-		 */
+		// Insert a token before another token in a language literal
 		insertBefore: function (inside, before, insert, root) {
 			root = root || _.languages;
 			var grammar = root[inside];
-			
-			if (arguments.length == 2) {
-				insert = arguments[1];
-				
-				for (var newToken in insert) {
-					if (insert.hasOwnProperty(newToken)) {
-						grammar[newToken] = insert[newToken];
-					}
-				}
-				
-				return grammar;
-			}
-			
 			var ret = {};
 
 			for (var token in grammar) {
@@ -131,29 +105,17 @@ var _ = self.Prism = {
 					ret[token] = grammar[token];
 				}
 			}
-			
-			// Update references in other language definitions
-			_.languages.DFS(_.languages, function(key, value) {
-				if (value === root[inside] && key != inside) {
-					this[key] = ret;
-				}
-			});
 
 			return root[inside] = ret;
 		},
 
 		// Traverse a language definition with Depth First Search
-		DFS: function(o, callback, type) {
+		DFS: function(o, callback) {
 			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
+				callback.call(o, i, o[i]);
 
-					if (_.util.type(o[i]) === 'Object') {
-						_.languages.DFS(o[i], callback);
-					}
-					else if (_.util.type(o[i]) === 'Array') {
-						_.languages.DFS(o[i], callback, i);
-					}
+				if (_.util.type(o) === 'Object') {
+					_.languages.DFS(o[i], callback);
 				}
 			}
 		}
@@ -266,63 +228,57 @@ var _ = self.Prism = {
 				continue;
 			}
 
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+			var pattern = grammar[token],
+				inside = pattern.inside,
+				lookbehind = !!pattern.lookbehind,
+				lookbehindLength = 0;
 
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					lookbehindLength = 0,
-					alias = pattern.alias;
+			pattern = pattern.pattern || pattern;
 
-				pattern = pattern.pattern || pattern;
+			for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
 
-				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+				var str = strarr[i];
 
-					var str = strarr[i];
+				if (strarr.length > text.length) {
+					// Something went terribly wrong, ABORT, ABORT!
+					break tokenloop;
+				}
 
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						break tokenloop;
+				if (str instanceof Token) {
+					continue;
+				}
+
+				pattern.lastIndex = 0;
+
+				var match = pattern.exec(str);
+
+				if (match) {
+					if(lookbehind) {
+						lookbehindLength = match[1].length;
 					}
 
-					if (str instanceof Token) {
-						continue;
+					var from = match.index - 1 + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    len = match.length,
+					    to = from + len,
+						before = str.slice(0, from + 1),
+						after = str.slice(to + 1);
+
+					var args = [i, 1];
+
+					if (before) {
+						args.push(before);
 					}
 
-					pattern.lastIndex = 0;
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match);
 
-					var match = pattern.exec(str);
+					args.push(wrapped);
 
-					if (match) {
-						if(lookbehind) {
-							lookbehindLength = match[1].length;
-						}
-
-						var from = match.index - 1 + lookbehindLength,
-							match = match[0].slice(lookbehindLength),
-							len = match.length,
-							to = from + len,
-							before = str.slice(0, from + 1),
-							after = str.slice(to + 1);
-
-						var args = [i, 1];
-
-						if (before) {
-							args.push(before);
-						}
-
-						var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias);
-
-						args.push(wrapped);
-
-						if (after) {
-							args.push(after);
-						}
-
-						Array.prototype.splice.apply(strarr, args);
+					if (after) {
+						args.push(after);
 					}
+
+					Array.prototype.splice.apply(strarr, args);
 				}
 			}
 		}
@@ -355,10 +311,9 @@ var _ = self.Prism = {
 	}
 };
 
-var Token = _.Token = function(type, content, alias) {
+var Token = _.Token = function(type, content) {
 	this.type = type;
 	this.content = content;
-	this.alias = alias;
 };
 
 Token.stringify = function(o, language, parent) {
@@ -386,11 +341,6 @@ Token.stringify = function(o, language, parent) {
 		env.attributes['spellcheck'] = 'true';
 	}
 
-	if (o.alias) {
-		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
-
 	_.hooks.run('wrap', env);
 
 	var attributes = '';
@@ -414,7 +364,7 @@ if (!self.document) {
 		    lang = message.language,
 		    code = message.code;
 
-		self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
+		self.postMessage(JSON.stringify(_.tokenize(code, _.languages[lang])));
 		self.close();
 	}, false);
 
@@ -521,28 +471,9 @@ if (Prism.languages.markup) {
 					inside: Prism.languages.markup.tag.inside
 				},
 				rest: Prism.languages.css
-			},
-			alias: 'language-css'
+			}
 		}
 	});
-	
-	Prism.languages.insertBefore('inside', 'attr-value', {
-		'style-attr': {
-			pattern: /\s*style=("|').+?\1/ig,
-			inside: {
-				'attr-name': {
-					pattern: /^\s*style/ig,
-					inside: Prism.languages.markup.tag.inside
-				},
-				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-				'attr-value': {
-					pattern: /.+/gi,
-					inside: Prism.languages.css
-				}
-			},
-			alias: 'language-css'
-		}
-	}, Prism.languages.markup.tag);
 }
 
 /* **********************************************
@@ -550,16 +481,10 @@ if (Prism.languages.markup) {
 ********************************************** */
 
 Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//g,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*?(\r?\n|$)/g,
-			lookbehind: true
-		}
-	],
+	'comment': {
+		pattern: /(^|[^\\])(\/\*[\w\W]*?\*\/|(^|[^:])\/\/.*?(\r?\n|$))/g,
+		lookbehind: true
+	},
 	'string': /("|')(\\?.)*?\1/g,
 	'class-name': {
 		pattern: /((?:(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/ig,
@@ -609,8 +534,7 @@ if (Prism.languages.markup) {
 					inside: Prism.languages.markup.tag.inside
 				},
 				rest: Prism.languages.javascript
-			},
-			alias: 'language-javascript'
+			}
 		}
 	});
 }
@@ -631,8 +555,7 @@ var Extensions = {
 	'html': 'markup',
 	'svg': 'markup',
 	'xml': 'markup',
-	'py': 'python',
-	'rb': 'ruby'
+	'py': 'python'
 };
 
 Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function(pre) {
@@ -674,7 +597,6 @@ Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(f
 });
 
 })();
-
 Prism.languages.bash = Prism.languages.extend('clike', {
 	'comment': {
 		pattern: /(^|[^"{\\])(#.*?(\r?\n|$))/g,
@@ -727,28 +649,9 @@ if (Prism.languages.markup) {
 					inside: Prism.languages.markup.tag.inside
 				},
 				rest: Prism.languages.css
-			},
-			alias: 'language-css'
+			}
 		}
 	});
-	
-	Prism.languages.insertBefore('inside', 'attr-value', {
-		'style-attr': {
-			pattern: /\s*style=("|').+?\1/ig,
-			inside: {
-				'attr-name': {
-					pattern: /^\s*style/ig,
-					inside: Prism.languages.markup.tag.inside
-				},
-				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-				'attr-value': {
-					pattern: /.+/gi,
-					inside: Prism.languages.css
-				}
-			},
-			alias: 'language-css'
-		}
-	}, Prism.languages.markup.tag);
 }
 Prism.languages.css.selector = {
 	pattern: /[^\{\}\s][^\{\}]*(?=\s*\{)/g,
